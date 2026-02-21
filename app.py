@@ -3,6 +3,9 @@
 import panel as pn
 import socket
 from panels.services_panel import create_services_panel
+from panels.import_panel import create_import_panel
+from panels.db_viewer_panel import create_db_viewer_panel
+from panels.employee_details_panel import create_employee_details_panel
 
 pn.extension('tabulator')
 
@@ -20,12 +23,15 @@ def create_app():
     
     tabs = pn.Tabs(
         ("ניהול שירותים", create_services_panel()),
+        ("הכנסת קבצים", create_import_panel()),
+        ("צפייה בנתונים", create_db_viewer_panel()),
+        ("פרטי עובד", create_employee_details_panel()),
         # Future panels will be added here:
-        # ("הכנסת קבצים", create_import_panel()),
         # ("שאילתות", create_queries_panel()),
         # ("גרפים", create_graphs_panel()),
         tabs_location='above',
-        sizing_mode='stretch_width'
+        sizing_mode='stretch_width',
+        active=1  # Default to "הכנסת קבצים" tab
     )
     
     template = pn.template.FastListTemplate(
